@@ -11,14 +11,9 @@ const Hero = () => (
   <Background color="bg-gray-100">
     <Section yPadding="py-6">
       <NavbarTwoColumns logo={<Logo xl />}>
-        <li>
-          <Link href="https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template">
-            GitHub
-          </Link>
-        </li>
-        <li>
+        {/* <li>
           <Link href="/">Sign in</Link>
-        </li>
+        </li> */}
       </NavbarTwoColumns>
     </Section>
 
@@ -26,14 +21,14 @@ const Hero = () => (
       <HeroOneButton
         title={
           <>
-            {'The modern landing page for\n'}
-            <span className="text-primary-500">React developers</span>
+              {'Купили авто из США и хотете знать с каким пробегом и в каком состоянии он был продан на аукционе?\n\n'}
+            {/* <span className="text-primary-500">React developers</span> */}
           </>
         }
-        description="The easiest way to build a React landing page in seconds."
+        description="Cleanmyvin – лучшая база данных проданных авто на Copart и IAAI.Покупали авто на аукционах Copart и IAAI? Хотите узнать историю авто и все технические подробности?"
         button={
-          <Link href="https://creativedesignsguru.com/category/nextjs/">
-            <Button xl>Download Your Free Theme</Button>
+          <Link href="/">
+            <Button xl>ПРОВЕРИТЬ АВТО</Button>
           </Link>
         }
       />
