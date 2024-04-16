@@ -16,10 +16,11 @@ const HeroOneButton = (props: IHeroOneButtonProps) => (
     <div className="mb-16 mt-4 text-2xl">{props.description}</div>
 
     <div style={{ color: "black" }}></div>  
-    
+
     <Button>
       {props.button}
     </Button>
+    
   </header>
 );
 

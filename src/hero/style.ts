@@ -5,6 +5,7 @@ const hoverColor = "rgb(247 250 252)";
 
 export const Button = styled("div")`
     background-color: ${primaryColor};
+    
     border: none;
     color: ${hoverColor};
     padding: 15px 32px;
