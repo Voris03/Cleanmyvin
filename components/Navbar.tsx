@@ -1,5 +1,4 @@
-import Image from 'next/image';
-
+import Image from "next/image";
 
 import {
   Box,
@@ -17,10 +16,10 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 
 export default function WithSubnavigation() {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Box>
@@ -35,7 +34,6 @@ export default function WithSubnavigation() {
         borderColor={useColorModeValue("gray.200", "gray.100")}
         align={"center"}
       >
-
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "left" }}>
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
@@ -51,7 +49,7 @@ export default function WithSubnavigation() {
         </Flex>
       </Flex>
     </Box>
-  )
+  );
 }
 
 // const DesktopNav = () => {
@@ -103,8 +101,6 @@ export default function WithSubnavigation() {
 //   )
 // }
 
-
-
 // const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 //   return (
 //     <Link
@@ -142,8 +138,6 @@ export default function WithSubnavigation() {
 //   )
 // }
 
-
-
 // const MobileNav = () => {
 //   return (
 //     <Stack
@@ -157,8 +151,6 @@ export default function WithSubnavigation() {
 //     </Stack>
 //   )
 // }
-
-
 
 // const MobileNavItem = ({ label, children, href }: NavItem) => {
 //   const { isOpen, onToggle } = useDisclosure()
@@ -213,14 +205,12 @@ export default function WithSubnavigation() {
 //   )
 // }
 
-
 // interface NavItem {
 //   label: string
 //   subLabel?: string
 //   children?: Array<NavItem>
 //   href?: string
 // }
-
 
 // const NAV_ITEMS: Array<NavItem> = [
 //   {
