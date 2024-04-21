@@ -1,0 +1,11 @@
+.swiper-button-prev {
+  color: #f4f4f4;
+}
+
+.swiper-button-next {
+  color: #f4f4f4;
+}
+
+.swiper-slide-thumb-active {
+  opacity: 1 !important;
+}
