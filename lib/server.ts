@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:4545";
+const BASE_URL = process.env.BASE_URL;
 
 const ROUTES = {
   vin: {
@@ -97,7 +97,9 @@ export const fetchLotFiles = async (options: {
     const response = await fetch(
       buildQuery(ROUTES.vin.files, { ":vinId": options.vin }),
       {
-        cache: "no-store",
+        next: {
+          revalidate: 3600,
+        },
       }
     );
 
