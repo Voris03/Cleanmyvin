@@ -7,13 +7,13 @@ RUN yarn --frozen-lockfile
 COPY . .
 ENV NODE_ENV production
 
-RUN npm run build
+RUN yarn --frozen-lockfile
 
 FROM node:20.12.2-slim as runner
 WORKDIR /app
 
 COPY --from=builder /app/package.json .
-COPY --from=builder /app/package-lock.json .
+COPY --from=builder /app/yarn.lock .
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 
