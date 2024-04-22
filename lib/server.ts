@@ -132,7 +132,7 @@ export const fetchLots = async (): Promise<LotType[]> => {
 
   const json = await response.json();
 
-  return json.responseObject;
+  return json.responseObject.slice(0, 1000);
 };
 
 export const fetchLotClean = async (options: { vin: string }) => {
