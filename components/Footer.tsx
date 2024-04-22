@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   chakra,
@@ -6,9 +7,9 @@ import {
   Text,
   useColorModeValue,
   VisuallyHidden,
-} from "@chakra-ui/react"
-import { FaInstagram, FaTwitter, FaTelegram, FaTiktok } from "react-icons/fa"
-import { ReactNode } from "react"
+} from "@chakra-ui/react";
+import { FaInstagram, FaTwitter, FaTelegram, FaTiktok } from "react-icons/fa";
+import { ReactNode } from "react";
 
 const currentYear = new Date().getFullYear();
 
@@ -17,9 +18,9 @@ const SocialButton = ({
   label,
   href,
 }: {
-  children: ReactNode
-  label: string
-  href: string
+  children: ReactNode;
+  label: string;
+  href: string;
 }) => {
   return (
     <chakra.button
@@ -29,6 +30,7 @@ const SocialButton = ({
       h={8}
       cursor={"pointer"}
       as={"a"}
+      target="_blank"
       href={href}
       display={"inline-flex"}
       alignItems={"center"}
@@ -41,12 +43,15 @@ const SocialButton = ({
       <VisuallyHidden>{label}</VisuallyHidden>
       {children}
     </chakra.button>
-  )
-}
+  );
+};
 
 export default function SmallWithSocial() {
   return (
     <Box
+      borderTop={1}
+      borderStyle={"solid"}
+      borderColor={"gray.200"}
       bg={useColorModeValue("gray.50", "gray.900")}
       color={useColorModeValue("gray.700", "gray.200")}
     >
@@ -59,23 +64,36 @@ export default function SmallWithSocial() {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        
-        <Text>© {currentYear}, <a href="#">Cleanmyvin.com</a></Text>
+        <Text>
+          © {currentYear}, <a href="/">Cleanmyvin.com</a>
+        </Text>
         <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"https://twitter.com/cleanmyvicom"}>
+          <SocialButton
+            label={"Twitter"}
+            href={"https://twitter.com/cleanmyvicom"}
+          >
             <FaTwitter />
           </SocialButton>
-          <SocialButton label={"Telegram"} href={"https://telegram.im/@cleanmyvin"}>
+          <SocialButton
+            label={"Telegram"}
+            href={"https://telegram.im/@cleanmyvin"}
+          >
             <FaTelegram />
           </SocialButton>
-          <SocialButton label={"Instagram"} href={"https://www.instagram.com/cleanvinmycom"}>
+          <SocialButton
+            label={"Instagram"}
+            href={"https://www.instagram.com/cleanvinmycom"}
+          >
             <FaInstagram />
           </SocialButton>
-          <SocialButton label={"Tiktok"} href={"https://tiktok.com/@cleanmyvincom"}>
+          <SocialButton
+            label={"Tiktok"}
+            href={"https://tiktok.com/@cleanmyvincom"}
+          >
             <FaTiktok />
           </SocialButton>
         </Stack>
       </Container>
     </Box>
-  )
+  );
 }

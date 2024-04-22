@@ -1,14 +1,11 @@
-"use client"
-import CallToActionWithAnnotation from "@/components/HeroSection"
-import SimpleThreeColumns from "@/components/Features"
-import SplitWithImage from "@/components/Testimonials"
+import Hero from "components/Hero";
+import Landing from "@/components/Landing";
 
-export default function Home() {
+export default function Page() {
   return (
     <>
-      <CallToActionWithAnnotation />
-      <SimpleThreeColumns />
-      <SplitWithImage />
+      <Hero />
+      <Landing />
     </>
-  )
+  );
 }

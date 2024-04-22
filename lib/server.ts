@@ -1,4 +1,6 @@
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = "https://checkusavin.com/api";
+const BASE_URL_CDN =
+  "https://cleanmyvin-production.fra1.cdn.digitaloceanspaces.com";
 
 const ROUTES = {
   vin: {
@@ -67,6 +69,10 @@ const buildQuery = (routeStr: string, params?: Record<string, string>) => {
   return `${BASE_URL}${route}`;
 };
 
+export const parseImageUrl = (origin: string, path?: string) => {
+  return path ? `${BASE_URL_CDN}/${path}` : origin;
+};
+
 export const fetchLot = async (options: {
   vin: string;
 }): Promise<LotType | undefined> => {
@@ -130,16 +136,12 @@ export const fetchLots = async (): Promise<LotType[]> => {
 };
 
 export const fetchLotClean = async (options: { vin: string }) => {
-  try {
-    const response = await fetch(
-      buildQuery(ROUTES.vin.clean, { ":vinId": options.vin }),
-      {
-        cache: "no-store",
-      }
-    );
+  const response = await fetch(
+    buildQuery(ROUTES.vin.clean, { ":vinId": options.vin }),
+    {
+      cache: "no-store",
+    }
+  );
 
-    if (!response.ok) throw new Error("Unable to fetch lot");
-  } catch (error) {
-    return undefined;
-  }
+  if (!response.ok) throw new Error("Unable to fetch lot");
 };
