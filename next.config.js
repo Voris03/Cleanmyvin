@@ -23,8 +23,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname:
-          "https://cleanmyvin-production.fra1.cdn.digitaloceanspaces.com",
+        hostname: "cleanmyvin-production.fra1.cdn.digitaloceanspaces.com",
         port: "",
         pathname: "**",
       },

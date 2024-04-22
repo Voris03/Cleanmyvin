@@ -81,6 +81,8 @@ export async function generateMetadata({
 export async function generateStaticParams() {
   const lots = await fetchLots();
 
+  console.log(lots.filter((lot) => !lot.vin));
+
   return lots.map((lot) => ({
     id: lot.vin,
   }));

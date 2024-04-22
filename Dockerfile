@@ -45,6 +45,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN yarn build
+RUN yarn add sharp
 
 FROM base AS runner
 WORKDIR /app
