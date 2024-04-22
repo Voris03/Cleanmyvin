@@ -7,7 +7,7 @@ RUN yarn --frozen-lockfile
 COPY . .
 ENV NODE_ENV production
 
-RUN yarn --frozen-lockfile
+RUN yarn build
 
 FROM node:20.12.2-slim as runner
 WORKDIR /app
