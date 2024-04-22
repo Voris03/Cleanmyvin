@@ -1,6 +1,15 @@
-const BASE_URL = "https://checkusavin.com/api";
-const BASE_URL_CDN =
-  "https://cleanmyvin-production.fra1.cdn.digitaloceanspaces.com";
+const configEnv = {
+  production: {
+    url: "https://checkusavin.com/api",
+    cdn: "https://cleanmyvin-production.fra1.cdn.digitaloceanspaces.com",
+  },
+  development: {
+    url: "http://localhost:4545",
+    cdn: "https://cleanmyvin-production.fra1.cdn.digitaloceanspaces.com",
+  },
+};
+
+const env = configEnv["production"];
 
 const ROUTES = {
   vin: {
@@ -64,36 +73,39 @@ function replaceKeysWithValue(str: string, obj: Record<string, string>) {
   return str;
 }
 
-const buildQuery = (routeStr: string, params?: Record<string, string>) => {
+const buildQuery = (
+  routeStr: string,
+  params?: Record<string, string>,
+  query?: Record<string, string | number>
+) => {
   const route = params ? replaceKeysWithValue(routeStr, params) : routeStr;
-  return `${BASE_URL}${route}`;
+  const queryParams = query
+    ? `?${Object.entries(query)
+        .map(([key, value]) => `${key}=${value}`)
+        .join("&")}`
+    : "";
+  return `${env.url}${route}${queryParams}`;
 };
 
 export const parseImageUrl = (origin: string, path?: string) => {
-  return path ? `${BASE_URL_CDN}/${path}` : origin;
+  return path ? `${env.cdn}/${path}` : origin;
 };
 
 export const fetchLot = async (options: {
   vin: string;
 }): Promise<LotType | undefined> => {
-  try {
-    const response = await fetch(
-      buildQuery(ROUTES.vin.one, { ":vinId": options.vin }),
-      {
-        cache: "no-store",
-      }
-    );
+  const response = await fetch(
+    buildQuery(ROUTES.vin.one, { ":vinId": options.vin }),
+    {
+      cache: "no-store",
+    }
+  );
 
-    if (!response.ok) throw new Error("Unable to fetch lot");
+  if (!response.ok) return undefined;
 
-    const json = await response.json();
+  const json = await response.json();
 
-    if (!json.responseObject) throw new Error("Unable to fetch lot");
-
-    return json.responseObject;
-  } catch (error) {
-    return undefined;
-  }
+  return json.responseObject;
 };
 
 export const fetchLotFiles = async (options: {
@@ -121,8 +133,29 @@ export const fetchLotFiles = async (options: {
   }
 };
 
-export const fetchLots = async (): Promise<LotType[]> => {
-  const response = await fetch(buildQuery(ROUTES.vin.many), {
+type LotsWithPagination = {
+  data: LotType[];
+  total: number;
+  offset: number;
+  limit: number;
+};
+const fetchLotsWithPagination = async ({
+  offset,
+  limit,
+}: {
+  offset: number;
+  limit: number;
+}): Promise<LotsWithPagination> => {
+  const query = buildQuery(
+    ROUTES.vin.many,
+    {},
+    {
+      offset,
+      limit,
+    }
+  );
+
+  const response = await fetch(query, {
     next: {
       revalidate: 3600,
     },
@@ -132,7 +165,37 @@ export const fetchLots = async (): Promise<LotType[]> => {
 
   const json = await response.json();
 
-  return json.responseObject.slice(0, 10000);
+  return json.responseObject;
+};
+
+export const fetchLots = async (): Promise<LotType[]> => {
+  const query = buildQuery(ROUTES.vin.many);
+
+  const response = await fetch(query, {
+    next: {
+      revalidate: 3600,
+    },
+  });
+
+  if (!response.ok) throw new Error("Unable to fetch lot");
+
+  const json = await response.json();
+
+  return json.responseObject.data;
+
+  // const payload: LotType[] = [];
+
+  // for (let offset = 0, limit = 1000; ; offset += limit) {
+  //   const res = await fetchLotsWithPagination({ offset, limit });
+  //   payload.push(...res.data);
+
+  //   console.log(`${offset} / ${res.total}`);
+  //   if (offset + limit >= res.total) {
+  //     break;
+  //   }
+  // }
+
+  // return payload;
 };
 
 export const fetchLotClean = async (options: { vin: string }) => {
