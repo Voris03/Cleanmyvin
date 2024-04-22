@@ -3,11 +3,13 @@
 import { useState, useEffect } from "react";
 import { Box, Flex, Skeleton } from "@chakra-ui/react";
 
-import { fetchLotFiles } from "@/lib/server";
+import { fetchLotFiles, parseImageUrl } from "@/lib/server";
 import SwiperComponent from "components/Swiper";
 
 const fetchImages = (vin: string) =>
-  fetchLotFiles({ vin }).then((images) => images.map((image) => image.origin));
+  fetchLotFiles({ vin }).then((images) =>
+    images.map((image) => parseImageUrl(image.origin, image.path))
+  );
 
 export function Swiper({ vin }: { vin: string }) {
   const [images, setImages] = useState<string[]>([]);
@@ -20,14 +22,7 @@ export function Swiper({ vin }: { vin: string }) {
   }, [vin]);
 
   return (
-    <Box
-      mt={{ base: "12px", xl: 0 }}
-      maxW="600px"
-      boxShadow="md"
-      borderWidth="1px"
-      borderRadius="lg"
-      p={4}
-    >
+    <>
       {isLoaded ? (
         <SwiperComponent images={images} />
       ) : (
@@ -61,6 +56,6 @@ export function Swiper({ vin }: { vin: string }) {
           </Flex>
         </Box>
       )}
-    </Box>
+    </>
   );
 }

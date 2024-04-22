@@ -27,7 +27,12 @@ import {
 } from "@chakra-ui/react";
 
 import { fetchLot, fetchLots } from "lib/server";
-import { buildAuctionHref, translateLoss, translateStatus } from "lib/utils";
+import {
+  buildAuctionHref,
+  translateLoss,
+  translateOdobrand,
+  translateStatus,
+} from "lib/utils";
 
 import ImageTire from "public/icons/interface/tire.png";
 import ImageMake from "public/icons/interface/make.png";
@@ -51,7 +56,7 @@ import ImageWrenchSingle from "public/icons/interface/wrench-single.png";
 import ImageHammer from "public/icons/interface/hammer.png";
 import SvgQuestion from "public/images/question.svg";
 
-import { Swiper, PaymentButton } from "./Client";
+import { Swiper, PaymentButton } from "components/vin/Client";
 
 type Props = {
   params: { id: string };
@@ -64,7 +69,7 @@ export async function generateMetadata({
 
   if (!lot) {
     return {
-      title: `Lot not found | CleanMyVin`,
+      title: `Lot Not Found | CleanMyVin`,
     };
   }
 
@@ -94,13 +99,13 @@ function Item({
 }) {
   return (
     <Flex>
-      <Flex flexDirection={{ base: "column", xl: "row" }}>
+      <Flex flexDirection={{ base: "column", lg: "row" }}>
         <HStack gap={3}>
           {image ? <Image src={image} alt="" width={18} height={18} /> : null}
           <Text>{title}:</Text>
         </HStack>
 
-        <Box ml={{ base: 0, xl: 3 }}>
+        <Box ml={{ base: 0, lg: 3 }}>
           {value ? (
             <Box
               display="flex"
@@ -128,18 +133,19 @@ export default async function Page({ params: { id } }: Props) {
   return (
     <>
       <Container maxW={"8xl"} py="24px">
-        <Box gap="12px" display={{ base: "block", xl: "flex" }}>
+        <Box gap="12px" display={{ base: "block", lg: "flex" }}>
           <Box
             flex="1"
             boxShadow="md"
+            bg="white"
             borderWidth="1px"
             borderRadius="lg"
             p={8}
           >
             <Box>
               <Stack
-                direction={{ base: "column", xl: "row" }}
-                justifyContent={{ base: "left", xl: "space-between" }}
+                direction={{ base: "column", lg: "row" }}
+                justifyContent={{ base: "left", lg: "space-between" }}
               >
                 <Box>
                   <Heading
@@ -182,13 +188,7 @@ export default async function Page({ params: { id } }: Props) {
                 <Item
                   image={ImageCheck}
                   title="Актуальность пробег"
-                  value={
-                    typeof lot.odobrand === "string"
-                      ? lot.odobrand === "ACTUAL"
-                        ? "актуально"
-                        : "не актуально"
-                      : undefined
-                  }
+                  value={translateOdobrand(lot.odobrand)}
                 />
 
                 <Divider />
@@ -277,10 +277,27 @@ export default async function Page({ params: { id } }: Props) {
             </Box>
           </Box>
 
-          <Swiper vin={lot.vin} />
+          <Box
+            mt={{ base: "12px", lg: 0 }}
+            maxW="600px"
+            boxShadow="md"
+            borderWidth="1px"
+            borderRadius="lg"
+            bg="white"
+            p={4}
+          >
+            <Swiper vin={lot.vin} />
+          </Box>
         </Box>
 
-        <Box boxShadow="md" borderWidth="1px" borderRadius="lg" p={8} mt="12px">
+        <Box
+          boxShadow="md"
+          borderWidth="1px"
+          borderRadius="lg"
+          p={8}
+          mt="12px"
+          bg="white"
+        >
           <TableContainer>
             <Table variant="simple">
               <TableCaption placement="bottom">История продаж</TableCaption>
@@ -323,10 +340,11 @@ export default async function Page({ params: { id } }: Props) {
           </TableContainer>
         </Box>
 
-        <Box gap={"12px"} display={{ base: "block", xl: "flex" }} mt="12px">
+        <Box gap={"12px"} display={{ base: "block", lg: "flex" }} mt="12px">
           <Box
             flex={"75%"}
             boxShadow="md"
+            bg="white"
             borderWidth="1px"
             borderRadius="lg"
             p={8}
@@ -339,7 +357,7 @@ export default async function Page({ params: { id } }: Props) {
               Технические характеристики
             </Heading>
 
-            <Flex direction={{ base: "column", xl: "row" }} mt="12px">
+            <Flex direction={{ base: "column", lg: "row" }} mt="12px">
               <Box flex="50%">
                 <Box mt="12px">
                   <Item
@@ -396,7 +414,7 @@ export default async function Page({ params: { id } }: Props) {
               Дополнительная информация
             </Heading>
 
-            <Flex direction={{ base: "column", xl: "row" }} mt="12px">
+            <Flex direction={{ base: "column", lg: "row" }} mt="12px">
               <Box flex="50%">
                 <Box mt="12px">
                   <Item image={ImageMake} title="Марка" value={lot?.make} />
@@ -440,10 +458,11 @@ export default async function Page({ params: { id } }: Props) {
           <Box
             flex={"25%"}
             boxShadow="md"
+            bg="white"
             borderWidth="1px"
             borderRadius="lg"
             overflow="hidden"
-            mt={{ base: "12px", xl: 0 }}
+            mt={{ base: "12px", lg: 0 }}
           >
             <Box w={"full"} bg={"white"}>
               <Stack
@@ -505,9 +524,16 @@ export default async function Page({ params: { id } }: Props) {
           </Box>
         </Box>
 
-        <Box boxShadow="md" borderWidth="1px" borderRadius="lg" p={8} mt="12px">
+        <Box
+          boxShadow="md"
+          borderWidth="1px"
+          borderRadius="lg"
+          p={8}
+          mt="12px"
+          bg="white"
+        >
           <Stack
-            direction={{ base: "column", xl: "row" }}
+            direction={{ base: "column", lg: "row" }}
             justifyContent="space-between"
             gap={{ base: "12px" }}
           >

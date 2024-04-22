@@ -6,7 +6,6 @@ RUN yarn --frozen-lockfile
 
 COPY . .
 ENV NODE_ENV production
-ENV BASE_URL https://stage.checkusavin.com/api
 
 RUN npm run build
 

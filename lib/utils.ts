@@ -42,6 +42,11 @@ export const translateAuctionStatus = (value?: string | null) => {
     : value;
 };
 
+export const translateOdobrand = (value?: string | null) => {
+  if (!value) return undefined;
+  return value === "ACTUAL" ? "актуально" : "не актуально";
+};
+
 export const buildAuctionHref = (
   source?: string | null,
   lotId?: string | null
