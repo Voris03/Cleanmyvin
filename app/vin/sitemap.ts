@@ -11,7 +11,7 @@ export async function generateSitemaps() {
     })
   );
 
-  console.log(offsets);
+  console.log("offsets", offsets);
   return offsets;
 }
 
@@ -20,6 +20,7 @@ export default async function sitemap({
 }: {
   id: number;
 }): Promise<MetadataRoute.Sitemap> {
+  console.log("id", id);
   const { data } = await fetchLotsWithPagination({
     offset: id * 50_000,
     limit: 50_000,
@@ -27,6 +28,6 @@ export default async function sitemap({
 
   return data.map((lot) => ({
     url: `https://checkusavin.com/vin/${lot.vin}`,
-    lastModified: lot.updatedAt.toISOString(),
+    lastModified: new Date(lot.updatedAt),
   }));
 }
