@@ -1,12 +1,7 @@
 import { fetchLots } from "lib/server";
 import { MetadataRoute } from "next";
 
-export default async function sitemap({
-  id,
-}: {
-  id: number;
-}): Promise<MetadataRoute.Sitemap> {
-  console.log("id", id);
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const data = await fetchLots();
 
   return data.map((lot) => ({
