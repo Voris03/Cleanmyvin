@@ -1,19 +1,5 @@
-import { fetchLots, fetchLotsWithPagination } from "lib/server";
+import { fetchLots } from "lib/server";
 import { MetadataRoute } from "next";
-
-export async function generateSitemaps() {
-  const data = await fetchLots();
-
-  const offsets = Array.from(
-    { length: Math.ceil(data.length / 50_000) },
-    (_, offset) => ({
-      id: offset,
-    })
-  );
-
-  console.log("offsets", offsets);
-  return offsets;
-}
 
 export default async function sitemap({
   id,
@@ -21,10 +7,7 @@ export default async function sitemap({
   id: number;
 }): Promise<MetadataRoute.Sitemap> {
   console.log("id", id);
-  const { data } = await fetchLotsWithPagination({
-    offset: id * 50_000,
-    limit: 50_000,
-  });
+  const data = await fetchLots();
 
   return data.map((lot) => ({
     url: `https://checkusavin.com/vin/${lot.vin}`,
