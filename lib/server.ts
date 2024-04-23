@@ -139,7 +139,8 @@ type LotsWithPagination = {
   offset: number;
   limit: number;
 };
-const fetchLotsWithPagination = async ({
+
+export const fetchLotsWithPagination = async ({
   offset,
   limit,
 }: {
