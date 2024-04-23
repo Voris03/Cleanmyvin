@@ -32,7 +32,7 @@ export default function Navbar() {
             >
               <Image src="/logo.png" alt="logo" width={40} height={40} />
               <Text as="span" color={"#000"} fontSize={"2xl"}>
-                Cleanmyvin.com
+                Checkusavin.com
               </Text>
             </Button>
           </Text>

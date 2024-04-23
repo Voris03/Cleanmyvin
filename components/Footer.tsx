@@ -62,7 +62,7 @@ export default function SmallWithSocial() {
         align={{ base: "center", md: "center" }}
       >
         <Text>
-          © {currentYear}, <a href="/">Cleanmyvin.com</a>
+          © {currentYear}, <a href="/">Checkusavin.com</a>
         </Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton
