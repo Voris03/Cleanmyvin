@@ -5,22 +5,23 @@ export async function generateSitemaps() {
   const data = await fetchLots();
 
   const offsets = Array.from(
-    { length: Math.ceil(data.length) },
+    { length: Math.ceil(data.length / 50_000) },
     (_, offset) => ({
-      offset,
+      id: offset,
     })
   );
 
+  console.log(offsets);
   return offsets;
 }
 
 export default async function sitemap({
-  offset,
+  id,
 }: {
-  offset: number;
+  id: number;
 }): Promise<MetadataRoute.Sitemap> {
   const { data } = await fetchLotsWithPagination({
-    offset: offset * 50_000,
+    offset: id * 50_000,
     limit: 50_000,
   });
 
