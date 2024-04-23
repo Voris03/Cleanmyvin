@@ -1,4 +1,4 @@
-import Head from "next/head"
+import Head from "next/head";
 import {
   Box,
   Heading,
@@ -13,8 +13,8 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightAddon,
-  InputRightElement
-} from "@chakra-ui/react"
+  InputRightElement,
+} from "@chakra-ui/react";
 
 import { Search2Icon, CloseIcon } from "@chakra-ui/icons";
 
@@ -46,8 +46,9 @@ export default function CallToActionWithAnnotation() {
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            Получите полную историю вашего автомобиля с Cleanmyvin - лучшей базой данных о продажах на аукционах Copart и IAAI.
-            Хотите узнать все о его прошлом и технических особенностях?
+            Получите полную историю вашего автомобиля с Checkusavin - лучшей
+            базой данных о продажах на аукционах Copart и IAAI. Хотите узнать
+            все о его прошлом и технических особенностях?
           </Text>
           <Stack
             direction={"column"}
@@ -68,7 +69,7 @@ export default function CallToActionWithAnnotation() {
                 borderRadius="md"
                 width="265px"
               />
-              <InputRightElement width="auto"> 
+              <InputRightElement width="auto">
                 <Button
                   size="sm"
                   colorScheme="blue"
@@ -78,11 +79,9 @@ export default function CallToActionWithAnnotation() {
                   Поиск
                 </Button>
               </InputRightElement>
-            </InputGroup>;
-
-            <Box
-              display={{base:"none", md:"flex"}}
-            >
+            </InputGroup>
+            ;
+            <Box display={{ base: "none", md: "flex" }}>
               <Icon
                 as={Arrow}
                 color={useColorModeValue("gray.800", "gray.300")}
@@ -120,7 +119,7 @@ export default function CallToActionWithAnnotation() {
         </Stack>
       </Container>
     </>
-  )
+  );
 }
 
 const Arrow = createIcon({
@@ -134,4 +133,4 @@ const Arrow = createIcon({
       fill="currentColor"
     />
   ),
-})
+});
