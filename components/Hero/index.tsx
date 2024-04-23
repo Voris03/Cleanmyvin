@@ -29,7 +29,21 @@ const HeroSection = () => {
 
   return (
     <Container maxW="6xl" px={{ base: 6, md: 3 }} py={{ base: 12, lg: 24 }}>
-      <Stack direction={{ base: "column", md: "row" }} justifyContent="center">
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        justifyContent="center"
+        position="relative"
+      >
+        <Box
+          width="100%"
+          height="100%"
+          position="absolute"
+          zIndex={-1}
+          top="-30px"
+        >
+          <DottedBox />
+        </Box>
+
         <Stack
           direction="column"
           justifyContent="center"
@@ -42,16 +56,6 @@ const HeroSection = () => {
             fontWeight="bold"
             textAlign="left"
           >
-            <Box
-              top="100px"
-              left="200px"
-              position="absolute"
-              height="full"
-              maxW="900px"
-              zIndex={-1}
-            >
-              <DottedBox />
-            </Box>
             <Text
               as="span"
               position={"relative"}
