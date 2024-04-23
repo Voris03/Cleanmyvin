@@ -49,9 +49,6 @@ const SocialButton = ({
 export default function SmallWithSocial() {
   return (
     <Box
-      borderTop={1}
-      borderStyle={"solid"}
-      borderColor={"gray.200"}
       bg={useColorModeValue("gray.50", "gray.900")}
       color={useColorModeValue("gray.700", "gray.200")}
     >
