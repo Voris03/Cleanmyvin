@@ -12,7 +12,8 @@ export async function generateSitemaps() {
   );
 
   console.log("offsets", offsets);
-  return offsets;
+  // return offsets;
+  return [{ id: 0 }, { id: 1 }];
 }
 
 export default async function sitemap({

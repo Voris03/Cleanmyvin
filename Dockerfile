@@ -38,7 +38,6 @@ RUN \
     else echo "Lockfile not found." && exit 1; \
     fi
 
-
 RUN yarn add sharp
 
 FROM base AS builder
