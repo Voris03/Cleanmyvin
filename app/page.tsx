@@ -5,7 +5,7 @@ import Landing from "@/components/Landing";
 export const metadata: Metadata = {
   title: "Landing Page | Checkusavin",
   other: {
-    verification: "00a03ec6533ca7f5c644d198d815329c",
+    verification: "db116b39f7a3ac5366079b1d9fe249a5",
     "google-site-verification": "XCrt0xYn-HvSVSFD-Nli_Xwopd0win1VZ2iaseOpeNo",
   },
 };
