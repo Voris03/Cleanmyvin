@@ -30,7 +30,7 @@ export default function Navbar() {
               gap={3}
               _hover={{ textDecoration: "none" }}
             >
-              <Image src="/logo.png" alt="logo" width={40} height={40} />
+              <Image src="/logo.svg" alt="logo" width={40} height={40} />
               <Text as="span" color={"#000"} fontSize={"2xl"}>
                 Checkusavin.com
               </Text>
