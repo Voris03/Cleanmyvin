@@ -204,6 +204,7 @@ export const fetchLotClean = async (options: { vin: string }) => {
     buildQuery(ROUTES.vin.clean, { ":vinId": options.vin }),
     {
       cache: "no-store",
+      mode: "no-cors",
     }
   );
 
