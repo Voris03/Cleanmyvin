@@ -74,7 +74,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${lot.title} | Checkusavin`,
+    title: `${lot.title} ${lot.vin} | Checkusavin`,
   };
 }
 
