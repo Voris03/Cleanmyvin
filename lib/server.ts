@@ -183,20 +183,6 @@ export const fetchLots = async (): Promise<LotType[]> => {
   const json = await response.json();
 
   return json.responseObject.data;
-
-  // const payload: LotType[] = [];
-
-  // for (let offset = 0, limit = 1000; ; offset += limit) {
-  //   const res = await fetchLotsWithPagination({ offset, limit });
-  //   payload.push(...res.data);
-
-  //   console.log(`${offset} / ${res.total}`);
-  //   if (offset + limit >= res.total) {
-  //     break;
-  //   }
-  // }
-
-  // return payload;
 };
 
 export const fetchLotClean = async (options: { vin: string }) => {
