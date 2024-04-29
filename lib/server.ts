@@ -162,7 +162,7 @@ export const fetchLotsWithPagination = async ({
     },
   });
 
-  if (!response.ok) throw new Error("Unable to fetch lot");
+  if (!response.ok) throw new Error("Unable to fetch lots w/ pagination");
 
   const json = await response.json();
 
@@ -178,7 +178,7 @@ export const fetchLots = async (): Promise<LotType[]> => {
     },
   });
 
-  if (!response.ok) throw new Error("Unable to fetch lot");
+  if (!response.ok) throw new Error("Unable to fetch lots");
 
   const json = await response.json();
 
