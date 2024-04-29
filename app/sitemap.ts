@@ -5,6 +5,8 @@ const SITEMAP_CHUNK = 10_000;
 
 export async function generateSitemaps() {
   try {
+    // return [{ id: 0 }, { id: 1 }];
+
     const data = await fetchLots();
 
     const offsets = Array.from(
@@ -27,6 +29,12 @@ export default async function sitemap({
   id: number;
 }): Promise<MetadataRoute.Sitemap> {
   try {
+    // return [
+    //   {
+    //     url: "1",
+    //   },
+    //   { url: "2" },
+    // ];
     const { data } = await fetchLotsWithPagination({
       offset: id * SITEMAP_CHUNK,
       limit: SITEMAP_CHUNK,

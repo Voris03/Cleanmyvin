@@ -13,7 +13,8 @@ export function PaymentButton({ vin }: { vin: string }) {
     setIsLoading(true);
 
     try {
-      await fetchLotClean({ vin });
+      const redirectUrl = await fetchLotClean({ vin });
+      window.open(redirectUrl, "_blank");
     } catch (error) {
       toast({
         title: "Произошла ошибка",
