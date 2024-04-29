@@ -147,6 +147,7 @@ export const fetchLotsWithPagination = async ({
   offset: number;
   limit: number;
 }): Promise<LotsWithPagination> => {
+  // return { data: [], limit: 0, offset: 0, total: 0 };
   const query = buildQuery(
     ROUTES.vin.many,
     {},
@@ -170,6 +171,7 @@ export const fetchLotsWithPagination = async ({
 };
 
 export const fetchLots = async (): Promise<LotType[]> => {
+  // return [];
   const query = buildQuery(ROUTES.vin.many);
 
   const response = await fetch(query, {
@@ -185,14 +187,20 @@ export const fetchLots = async (): Promise<LotType[]> => {
   return json.responseObject.data;
 };
 
-export const fetchLotClean = async (options: { vin: string }) => {
+export const fetchLotClean = async (options: {
+  vin: string;
+}): Promise<string> => {
   const response = await fetch(
     buildQuery(ROUTES.vin.clean, { ":vinId": options.vin }),
     {
+      method: "POST",
       cache: "no-store",
-      mode: "no-cors",
     }
   );
 
-  if (!response.ok) throw new Error("Unable to fetch lot");
+  if (!response.ok) throw new Error("Unable to create payment");
+
+  const json = await response.json();
+
+  return json.responseObject;
 };
