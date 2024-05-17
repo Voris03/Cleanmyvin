@@ -71,10 +71,7 @@ export default function SmallWithSocial() {
           >
             <FaTwitter />
           </SocialButton>
-          <SocialButton
-            label={"Telegram"}
-            href={"https://telegram.im/@cleanmyvin"}
-          >
+          <SocialButton label={"Telegram"} href={"https://t.me/checkusavin"}>
             <FaTelegram />
           </SocialButton>
           <SocialButton
