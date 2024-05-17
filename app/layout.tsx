@@ -1,7 +1,21 @@
+import { Metadata } from "next";
+import { Suspense } from "react";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Providers from "@/Providers";
 
-import Providers from "Providers";
+import Head from "./_components/Head";
+import { Yandex } from "./_components/yandex";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Checkusavin",
+    default: "Авто из США | Checkusavin",
+  },
+  description:
+    "Купили авто из США? Узнайте его историю и технические подробности.",
+};
 
 export default function RootLayout({
   children,
@@ -10,7 +24,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <head />
+      <Head />
+
+      <Suspense>
+        <Yandex />
+      </Suspense>
 
       <body>
         <Providers>

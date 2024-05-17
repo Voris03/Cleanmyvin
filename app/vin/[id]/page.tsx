@@ -69,12 +69,12 @@ export async function generateMetadata({
 
   if (!lot) {
     return {
-      title: `Lot Not Found | Checkusavin`,
+      title: `Не найдено`,
     };
   }
 
   return {
-    title: `${lot.title} ${lot.vin} | Checkusavin`,
+    title: `${lot.title} ${lot.vin}`,
   };
 }
 
