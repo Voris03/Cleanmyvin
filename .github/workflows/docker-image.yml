@@ -5,7 +5,7 @@ on: push
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  WHO_TO_TRUST: ${{ secrets.DATABASE_URL }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 jobs:
   build-and-push-image:
