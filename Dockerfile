@@ -39,6 +39,7 @@ RUN \
     fi
 
 RUN yarn add sharp
+RUN yarn prisma generate
 
 FROM base AS builder
 WORKDIR /app
