@@ -33,6 +33,7 @@ import {
   translateOdobrand,
   translateStatus,
 } from "lib/utils";
+import { prisma } from "lib/prisma";
 
 import ImageTire from "public/icons/interface/tire.png";
 import ImageMake from "public/icons/interface/make.png";
@@ -79,7 +80,17 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const lots = await fetchLots();
+  const lots = await prisma.lot.findMany({
+    where: {
+      isArchived: false,
+    },
+    orderBy: {
+      createdAt: "asc",
+    },
+    select: {
+      vin: true,
+    },
+  });
 
   return lots.map((lot) => ({
     id: lot.vin,
