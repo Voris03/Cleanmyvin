@@ -9,7 +9,7 @@ const configEnv = {
   },
 };
 
-const env = configEnv["development"];
+const env = configEnv["production"];
 
 const ROUTES = {
   vin: {
