@@ -1,34 +1,11 @@
-# FROM node:20.12.2-slim as builder
-# WORKDIR /app
-
-# COPY package.json yarn.lock ./
-# RUN yarn --frozen-lockfile
-
-# COPY . .
-# ENV NODE_ENV production
-
-# RUN yarn build
-
-# FROM node:20.12.2-slim as runner
-# WORKDIR /app
-
-# COPY --from=builder /app/package.json .
-# COPY --from=builder /app/yarn.lock .
-# COPY --from=builder /app/next.config.js ./
-# COPY --from=builder /app/public ./public
-
-# COPY --from=builder /app/.next/standalone ./
-# COPY --from=builder /app/.next/static ./.next/static
-
-# EXPOSE 3000
-
-# ENTRYPOINT ["yarn", "start"]
-
 FROM node:20-alpine AS base
 
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
+
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
 
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -51,6 +28,9 @@ RUN yarn build
 
 FROM base AS runner
 WORKDIR /app
+
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
 
 ENV NODE_ENV production
 
